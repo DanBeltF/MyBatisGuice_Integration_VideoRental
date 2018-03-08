@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface ClienteMapper {
     
-    default Cliente consultarCliente(Integer id){
+    default Cliente consultarCliente(Long id){
         return consultarClienteGeneral(id).get(0);
     }
     
@@ -37,7 +37,7 @@ public interface ClienteMapper {
         return consultarClienteGeneral(null);
     }
     
-    public List<Cliente> consultarClienteGeneral(@Param("idcli") Integer id);
+    public List<Cliente> consultarClienteGeneral(@Param("idcli") Long id);
     
     public void agregarCliente(@Param("doc") long documento, 
             @Param("nom") String nombre, 

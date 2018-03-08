@@ -14,6 +14,8 @@ import edu.eci.pdsw.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.pdsw.samples.services.ServiciosAlquiler;
 import java.sql.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * 
@@ -35,9 +37,11 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public Cliente consultarCliente(long docu) throws ExcepcionServiciosAlquiler {
-        return daoCliente.load(docu);
-        
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return daoCliente.load(docu);
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("Error al consulta al cliente con Documento: "+docu,ex);
+        }
     }
 
     @Override
@@ -47,7 +51,6 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public List<Cliente> consultarClientes() throws ExcepcionServiciosAlquiler {
-        return daoCliente.load(0)
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -87,7 +90,12 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public void registrarCliente(Cliente p) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            daoCliente.save(p);
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("Error al registar el cliente con docuemnto: "+p.getDocumento(),ex);
+        }
     }
 
     @Override
@@ -107,7 +115,12 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public void registrarItem(Item i) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            daoItem.save(i);
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("Error al registar el item "+i.getId(),ex);
+        }
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
