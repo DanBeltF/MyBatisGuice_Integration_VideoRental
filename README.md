@@ -2,6 +2,11 @@
 ### Procesos de Desarrollo de Software - PDSW
 
 #### Integración de Capas con Google Guice
+
+#### Entrega ejercicio en clase por:
+##### Sergio Andres Rodriguez
+##### Jonathan Prieto
+
 ![](img/cmodel.png)
 
 # Parte I. (Inicio en clase, terminado para el Jueves)
