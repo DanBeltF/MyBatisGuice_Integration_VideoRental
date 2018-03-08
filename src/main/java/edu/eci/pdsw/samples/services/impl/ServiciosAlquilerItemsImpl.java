@@ -65,7 +65,8 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public List<Item> consultarItemsDisponibles() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return daoItem.itemsDisponibles();
+
     }
 
     @Override
@@ -110,7 +111,11 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public void actualizarTarifaItem(int id, long tarifa) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            daoItem.actualizarTarifaItem(id, tarifa);
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("Error al actualizar la tarifa del item "+id,ex);
+        }
     }
 
     @Override
@@ -120,14 +125,10 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
         } catch (PersistenceException ex) {
             throw new ExcepcionServiciosAlquiler("Error al registar el item "+i.getId(),ex);
         }
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void vetarCliente(long docu, boolean estado) throws ExcepcionServiciosAlquiler {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
-    
+    } 
 }

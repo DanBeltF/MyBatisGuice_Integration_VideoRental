@@ -14,6 +14,7 @@ import edu.eci.pdsw.samples.entities.Item;
 import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemMapper;
 import edu.eci.pdsw.samples.entities.TipoItem;
 import java.sql.SQLException;
+import java.util.List;
 
 
 
@@ -44,9 +45,27 @@ public class MyBATISItemDAO implements ItemDAO{
         }
         catch(org.apache.ibatis.exceptions.PersistenceException e){
             throw new PersistenceException("Error al consultar el item "+id,e);
+        }catch(java.lang.IndexOutOfBoundsException ex){
+            throw new PersistenceException("Error al consultar el item "+id,ex);
         }
-        
-        
     }
     
+    @Override
+    public List<Item> itemsDisponibles() {
+        return itemMapper.consultarItems();
+    }
+
+    @Override
+    public void actualizarTarifaItem(int id, long tarifa) throws PersistenceException {
+        try {
+            itemMapper.actualizarTarifaItem(id, tarifa);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("Error al actualizar la tarifa del item "+id,e);
+        }
+    }
+
+    @Override
+    public long consultarCostoAlquiler(int idItem, int numDias) throws PersistenceException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

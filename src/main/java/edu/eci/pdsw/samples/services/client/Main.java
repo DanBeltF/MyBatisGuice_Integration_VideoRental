@@ -24,6 +24,10 @@ public class Main {
 //        ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().registrarItem(new Item(new TipoItem(2, "Juego"), 8, "Need for Speed: Payback", "NFS es un videojuego de carreras de acción creada por Electronic Arts.", java.sql.Date.valueOf("2017-11-10"), 3000, "DVD", "Carreras"));
         System.out.println("--------------\nDespues de registrar\n--------------\n"+ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().consultarItem(8));
         System.out.println(ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().consultarCliente(317658));
+        System.out.println(ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().consultarItemsDisponibles());
+        System.out.println(ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().consultarItem(7));
+        ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().actualizarTarifaItem(7, 4500);
+        System.out.println(ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().consultarItem(7));
         System.exit(0);
     }
     

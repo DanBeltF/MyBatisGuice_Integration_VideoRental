@@ -30,6 +30,10 @@
         VALUES (#{it.id},#{it.nombre},#{it.descripcion},#{it.fechaLanzamiento},#{it.tarifaxDia},#{it.formatoRenta},#{it.genero},#{it.tipo.id})
     </insert>
     
+    <update id="actualizarTarifaItem" parameterType="map">
+        UPDATE VI_ITEMS SET tarifaxdia=#{tar} WHERE id=#{id}
+    </update>
+    
     <resultMap type="Item" id="ItemResult">
         <id property="id" column="i_id"/>
         <result property="nombre" column="i_nombre" />
