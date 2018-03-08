@@ -30,6 +30,7 @@ public class Main {
         System.out.println(ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().consultarItem(7));
         ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().vetarCliente(317658, true);
         System.out.println(ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().consultarCliente(317658));
+        System.out.println("---Costo del alquiler--- " + ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().consultarCostoAlquiler(8, 4));
         System.exit(0);
     }
     

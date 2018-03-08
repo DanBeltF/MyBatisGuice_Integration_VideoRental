@@ -66,6 +66,6 @@ public class MyBATISItemDAO implements ItemDAO{
 
     @Override
     public long consultarCostoAlquiler(int idItem, int numDias) throws PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return itemMapper.consultarItem(idItem).getTarifaxDia()*numDias;
     }
 }

@@ -18,7 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * 
+ *
  * @author hcadavid
  */
 @Singleton
@@ -26,12 +26,12 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Inject
     private ItemDAO daoItem;
-    
+
     @Inject
     private ClienteDAO daoCliente;
-    
-    private static final int MULTA_DIARIA=5000;
-    
+
+    private static final int MULTA_DIARIA = 5000;
+
     @Override
     public int valorMultaRetrasoxDia() {
         return MULTA_DIARIA;
@@ -42,16 +42,16 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
         try {
             return daoCliente.load(docu);
         } catch (PersistenceException ex) {
-            throw new ExcepcionServiciosAlquiler("Error al consulta al cliente con Documento: "+docu,ex);
+            throw new ExcepcionServiciosAlquiler("Error al consulta al cliente con Documento: " + docu, ex);
         }
     }
 
     @Override
     public List<ItemRentado> consultarItemsCliente(long idcliente) throws ExcepcionServiciosAlquiler {
-        try{
+        try {
             return daoCliente.consultarItemsRentados(idcliente);
         } catch (PersistenceException ex) {
-            throw new ExcepcionServiciosAlquiler("Error al consulta los items del cliente con Documento: "+idcliente,ex);
+            throw new ExcepcionServiciosAlquiler("Error al consulta los items del cliente con Documento: " + idcliente, ex);
         }
     }
 
@@ -60,7 +60,7 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
         try {
             return daoCliente.loadClientes();
         } catch (PersistenceException ex) {
-            throw new ExcepcionServiciosAlquiler("Error al consulta al clientes.",ex);
+            throw new ExcepcionServiciosAlquiler("Error al consulta al clientes.", ex);
         }
     }
 
@@ -69,7 +69,7 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
         try {
             return daoItem.load(id);
         } catch (PersistenceException ex) {
-            throw new ExcepcionServiciosAlquiler("Error al consultar el item "+id,ex);
+            throw new ExcepcionServiciosAlquiler("Error al consultar el item " + id, ex);
         }
     }
 
@@ -99,7 +99,7 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
         try {
             daoCliente.addItemACliente(docu, item, date, numdias);
         } catch (PersistenceException ex) {
-            throw new ExcepcionServiciosAlquiler("Error al agregar el item con id: "+item.getId()+", al cliente con documento: "+docu,ex);
+            throw new ExcepcionServiciosAlquiler("Error al agregar el item con id: " + item.getId() + ", al cliente con documento: " + docu, ex);
         }
     }
 
@@ -108,7 +108,7 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
         try {
             daoCliente.save(p);
         } catch (PersistenceException ex) {
-            throw new ExcepcionServiciosAlquiler("Error al registar el cliente con docuemnto: "+p.getDocumento(),ex);
+            throw new ExcepcionServiciosAlquiler("Error al registar el cliente con docuemnto: " + p.getDocumento(), ex);
         }
     }
 
@@ -119,7 +119,11 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public long consultarCostoAlquiler(int iditem, int numdias) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return daoItem.consultarCostoAlquiler(iditem, numdias);
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("Error al consultar el costo del alquiler del item: " + iditem, ex);
+        }
     }
 
     @Override
@@ -127,7 +131,7 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
         try {
             daoItem.actualizarTarifaItem(id, tarifa);
         } catch (PersistenceException ex) {
-            throw new ExcepcionServiciosAlquiler("Error al actualizar la tarifa del item "+id,ex);
+            throw new ExcepcionServiciosAlquiler("Error al actualizar la tarifa del item: " + id, ex);
         }
     }
 
@@ -136,17 +140,17 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
         try {
             daoItem.save(i);
         } catch (PersistenceException ex) {
-            throw new ExcepcionServiciosAlquiler("Error al registar el item "+i.getId(),ex);
+            throw new ExcepcionServiciosAlquiler("Error al registar el item: " + i.getId(), ex);
         }
     }
 
     @Override
     public void vetarCliente(long docu, boolean estado) throws ExcepcionServiciosAlquiler {
         try {
-            daoCliente.vetarCliente(docu,estado);
+            daoCliente.vetarCliente(docu, estado);
         } catch (PersistenceException ex) {
-            throw new ExcepcionServiciosAlquiler("Error al consulta al cliente con Documento: "+docu,ex);
+            throw new ExcepcionServiciosAlquiler("Error al consultar al cliente con Documento: " + docu, ex);
         }
-        
+
     }
 }
