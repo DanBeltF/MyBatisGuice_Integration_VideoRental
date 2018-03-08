@@ -32,7 +32,7 @@
 7. Implemente el método load de la clase MyBATISDAOCliente, y el método 'consultarCliente' (haciendo uso del DAOCLiente inyectado). Haga un programa para comprobar que la consulta de un cliente se haga correctamente, a través de la capa lógica.
 
 
-<!--## Parte II (para el Jueves)
+## Parte II (para el Jueves)
 
 1. Agregue los elementos desarrollados en el punto I (dependencias, mappers, DAOs, etc) en el proyecto que sólo tiene la capa de presentación.
 2. Ajuste los casos de prueba, para que ahora haga uso de la capa lógica que hace uso de la base de datos volátil:
@@ -42,4 +42,4 @@
 	```
 
 3. Implemente las operaciones de la lógica que hagan falta para satisfacer los requerido por la capa de presentación, teniendo en cuenta, lo cual eventualmente requerirá agregar más operaciones a los DAOs -y por ende- más mappers de MyBATIS.
-4. Tenga en cuenta, a las operaciones que impliquen registrar o actualizar registros, demarcar la transaccionalidad con la anotación @Transactional.-->
+4. Tenga en cuenta, a las operaciones que impliquen registrar o actualizar registros, demarcar la transaccionalidad con la anotación @Transactional.
