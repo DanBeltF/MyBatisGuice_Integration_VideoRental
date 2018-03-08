@@ -10,6 +10,10 @@ import edu.eci.pdsw.sampleprj.dao.ClienteDAO;
 import edu.eci.pdsw.sampleprj.dao.PersistenceException;
 import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ClienteMapper;
 import edu.eci.pdsw.samples.entities.Cliente;
+import edu.eci.pdsw.samples.entities.Item;
+import edu.eci.pdsw.samples.entities.ItemRentado;
+import java.sql.Date;
+import java.util.List;
 
 /**
  *
@@ -18,6 +22,8 @@ import edu.eci.pdsw.samples.entities.Cliente;
 public class MyBATISClienteDAO implements ClienteDAO{
     @Inject
     private ClienteMapper clienteMapper;
+    
+    private final static long MILLISECONDS_IN_DAY = 24 * 60 * 60 * 1000;
     
     @Override
     public void save(Cliente c) throws PersistenceException{
@@ -32,6 +38,42 @@ public class MyBATISClienteDAO implements ClienteDAO{
             throw new PersistenceException("Error al consultar el cliente "+id,e);
         }catch(java.lang.IndexOutOfBoundsException ex){
             throw new PersistenceException("Error al consultar el cliente "+id,ex);
+        }
+    }
+
+    @Override
+    public void addItemACliente(long docu, Item i, Date date,int numdias) throws PersistenceException {
+        try{
+            clienteMapper.agregarItemRentadoACliente(docu, i.getId(), date, new Date(date.getTime()+(long)numdias*MILLISECONDS_IN_DAY));
+        }catch(org.apache.ibatis.exceptions.PersistenceException e){
+            throw new PersistenceException("Error al agregar el item con id: "+i.getId()+", al cliente con documento: "+docu,e);
+        }
+    }
+
+    @Override
+    public List<ItemRentado> consultarItemsRentados(long doc) throws PersistenceException {
+        try{
+            return clienteMapper.consultarCliente(doc).getRentados();
+        }catch(org.apache.ibatis.exceptions.PersistenceException e){
+            throw new PersistenceException("Error al consultar los items del cliente con documento: "+doc,e);
+        }
+    }
+
+    @Override
+    public List<Cliente> loadClientes() throws PersistenceException {
+        try{
+            return clienteMapper.consultarClientes();
+        }catch(org.apache.ibatis.exceptions.PersistenceException e){
+            throw new PersistenceException("Error al consultar el clientes.",e);
+        }
+    }
+
+    @Override
+    public void vetarCliente(long doc,boolean estado) throws PersistenceException {
+        try{
+            clienteMapper.vetarCliente(doc,estado);
+        }catch(org.apache.ibatis.exceptions.PersistenceException e){
+            throw new PersistenceException("Error al consultar el clientes.",e);
         }
     }
     

@@ -1,6 +1,7 @@
 package edu.eci.pdsw.sampleprj.dao.mybatis.mappers;
 
 import edu.eci.pdsw.samples.entities.Cliente;
+import edu.eci.pdsw.samples.entities.ItemRentado;
 import java.util.Date;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
@@ -23,11 +24,11 @@ public interface ClienteMapper {
      * @param fechainicio
      * @param fechafin 
      */
-    public void agregarItemRentadoACliente(@Param("idi")int id, 
+    public void agregarItemRentadoACliente(@Param("idi") long id, 
             @Param("idcli") int idit, 
             @Param("fini") Date fechainicio,
             @Param("ffin") Date fechafin);
-
+    
     /**
      * Consultar todos los clientes
      * @return 
@@ -36,7 +37,7 @@ public interface ClienteMapper {
     default List<Cliente> consultarClientes(){
         return consultarClienteGeneral(null);
     }
-    
+      
     public List<Cliente> consultarClienteGeneral(@Param("idcli") Long id);
     
     public void agregarCliente(@Param("doc") long documento, 
@@ -46,5 +47,7 @@ public interface ClienteMapper {
             @Param("mail") String email, 
             @Param("vetado") boolean vetado       
     );
+
+    public void vetarCliente(@Param("doc") long doc, @Param("vet") boolean estado);
     
 }

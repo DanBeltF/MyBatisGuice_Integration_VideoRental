@@ -28,6 +28,8 @@ public class Main {
         System.out.println(ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().consultarItem(7));
         ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().actualizarTarifaItem(7, 4500);
         System.out.println(ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().consultarItem(7));
+        ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().vetarCliente(317658, true);
+        System.out.println(ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().consultarCliente(317658));
         System.exit(0);
     }
     

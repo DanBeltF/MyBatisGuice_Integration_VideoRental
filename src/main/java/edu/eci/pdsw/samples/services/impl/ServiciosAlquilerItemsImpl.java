@@ -29,10 +29,12 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
     
     @Inject
     private ClienteDAO daoCliente;
-        
+    
+    private static final int MULTA_DIARIA=5000;
+    
     @Override
     public int valorMultaRetrasoxDia() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return MULTA_DIARIA;
     }
 
     @Override
@@ -46,12 +48,20 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public List<ItemRentado> consultarItemsCliente(long idcliente) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            return daoCliente.consultarItemsRentados(idcliente);
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("Error al consulta los items del cliente con Documento: "+idcliente,ex);
+        }
     }
 
     @Override
     public List<Cliente> consultarClientes() throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return daoCliente.loadClientes();
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("Error al consulta al clientes.",ex);
+        }
     }
 
     @Override
@@ -86,14 +96,17 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public void registrarAlquilerCliente(Date date, long docu, Item item, int numdias) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            daoCliente.addItemACliente(docu, item, date, numdias);
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("Error al agregar el item con id: "+item.getId()+", al cliente con documento: "+docu,ex);
+        }
     }
 
     @Override
     public void registrarCliente(Cliente p) throws ExcepcionServiciosAlquiler {
         try {
             daoCliente.save(p);
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         } catch (PersistenceException ex) {
             throw new ExcepcionServiciosAlquiler("Error al registar el cliente con docuemnto: "+p.getDocumento(),ex);
         }
@@ -129,6 +142,11 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public void vetarCliente(long docu, boolean estado) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    } 
+        try {
+            daoCliente.vetarCliente(docu,estado);
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("Error al consulta al cliente con Documento: "+docu,ex);
+        }
+        
+    }
 }

@@ -50,6 +50,10 @@
         VALUES (#{doc},#{nom},#{tel},#{dir},#{mail},#{vetado})
     </insert>
     
+    <update parameterType="map" id="vetarCliente">
+        UPDATE VI_CLIENTES SET vetado=#{vet} WHERE documento = #{doc}
+    </update>
+    
     <resultMap type="Cliente" id="ClienteResult" >
         <id property="documento" column="c_documento"/>
         <result property="nombre" column="c_nombre"/>
