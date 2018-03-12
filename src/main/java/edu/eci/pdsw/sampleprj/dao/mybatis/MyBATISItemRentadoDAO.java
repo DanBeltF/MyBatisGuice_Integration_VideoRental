@@ -24,13 +24,22 @@ public class MyBATISItemRentadoDAO implements ItemRentadoDAO{
             Long multa = 0L;
             ItemRentado ir = itemRentadoMapper.consultarItemRentado(idItem);
             if(ir.getFechafinrenta().getTime()-fechaDevolucion.getTime() < 0){
-                multa = (long) ((int) ((ir.getFechafinrenta().getTime()-fechaDevolucion.getTime())/86400000))*MULTA_DIARIA;
+                multa = (long) Math.abs((int) ((ir.getFechafinrenta().getTime()-fechaDevolucion.getTime())/86400000)*MULTA_DIARIA);
             }
             return multa;
         } catch (org.apache.ibatis.exceptions.PersistenceException e) {
             throw new PersistenceException("Error al consultar el item "+idItem,e);
         } catch (java.lang.IndexOutOfBoundsException ex){
             throw new PersistenceException("No se encontro un item con un id: "+idItem,ex);
+        }
+    }
+
+    @Override
+    public void registrarDevolucion(int idItem) throws PersistenceException {
+        try {
+            itemRentadoMapper.registrarDevolucion(idItem);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("Error al devolver el item "+idItem,e);
         }
     }
     

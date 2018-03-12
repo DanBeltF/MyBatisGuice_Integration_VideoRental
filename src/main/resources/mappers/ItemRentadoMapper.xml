@@ -40,6 +40,10 @@
         </if>
     </select>
     
+    <delete id="registrarDevolucion" parameterType="map">
+        DELETE FROM VI_ITEMRENTADO WHERE ITEMS_id=#{iid}
+    </delete>
+    
     <resultMap type="ItemRentado" id="ItemRentadoResult">
         <id property="id" column="ir_id"/>
         <result property="fechainiciorenta" column="ir_fechainiciorenta"/>

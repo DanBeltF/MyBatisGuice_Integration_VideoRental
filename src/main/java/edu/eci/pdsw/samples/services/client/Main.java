@@ -32,7 +32,9 @@ public class Main {
         ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().vetarCliente(317658, true);
         System.out.println(ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().consultarCliente(317658));
         System.out.println("---Costo del alquiler--- " + ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().consultarCostoAlquiler(8, 4));
-        System.out.println("---Costo de una multa---" + ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().consultarMultaAlquiler(8, java.sql.Date.valueOf(LocalDate.now())));
+        //System.out.println("---Costo de una multa--- " + ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().consultarMultaAlquiler(8, java.sql.Date.valueOf(LocalDate.now())));
+        //ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().registrarDevolucion(8);
+        //ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().registrarAlquilerCliente(java.sql.Date.valueOf("2018-03-9"), 317658, ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().consultarItem(8), 1);
         System.exit(0);
     }
     

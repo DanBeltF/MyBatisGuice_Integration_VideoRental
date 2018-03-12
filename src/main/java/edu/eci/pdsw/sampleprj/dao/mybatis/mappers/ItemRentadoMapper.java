@@ -19,4 +19,6 @@ public interface ItemRentadoMapper {
     }
     
     public List<ItemRentado> consultarItemRentadoGeneral(@Param("iid") Integer id);
+    
+    public void registrarDevolucion(@Param("iid") Integer id);
 }
