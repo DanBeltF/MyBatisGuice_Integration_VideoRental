@@ -37,13 +37,14 @@ public class MyBATISClienteDAO implements ClienteDAO{
         }catch(org.apache.ibatis.exceptions.PersistenceException e){
             throw new PersistenceException("Error al consultar el cliente "+id,e);
         }catch(java.lang.IndexOutOfBoundsException ex){
-            throw new PersistenceException("Error al consultar el cliente "+id,ex);
+            throw new PersistenceException("Un cliente con Documento "+id+" no ha sido encontrado",ex);
         }
     }
 
     @Override
     public void addItemACliente(long docu, Item i, Date date,int numdias) throws PersistenceException {
         try{
+            System.out.println("\n\nIn add\nDocu "+docu+" iditem :"+ i.getId()+" fini: "+ date+" ffin: "+ new Date(date.getTime()+(long)numdias*MILLISECONDS_IN_DAY));
             clienteMapper.agregarItemRentadoACliente(docu, i.getId(), date, new Date(date.getTime()+(long)numdias*MILLISECONDS_IN_DAY));
         }catch(org.apache.ibatis.exceptions.PersistenceException e){
             throw new PersistenceException("Error al agregar el item con id: "+i.getId()+", al cliente con documento: "+docu,e);

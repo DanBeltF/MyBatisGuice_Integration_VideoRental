@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head></h:head>
+    <h:body>
+        <h:form id="form">
+            <p:dataTable var="registrados" value="#{AlquilerItems.clientes}" selectionMode="single" selection="#{AlquilerItems.selected}" rowKey="#{registrados.documento}" id="registrado">
+                <f:facet name="header">
+                    <h:outputText value="Clientes registrados"/>
+                </f:facet>
+                <p:column headerText="Model">
+                    <f:facet name="header">
+                        <h:outputText value="Documento"/>
+                    </f:facet>
+                    <h:outputText value="#{registrados.documento}"/>
+                </p:column>
+                <p:column headerText="Model">
+                    <f:facet name="header">
+                        <h:outputText value="Nombre"/>
+                    </f:facet>
+                    <h:outputText value="#{registrados.nombre}"/>
+                </p:column>
+                <p:column headerText="Model">
+                    <f:facet name="header">
+                        <h:outputText value="Email"/>
+                    </f:facet>
+                    <h:outputText value="#{registrados.email}"/>
+                </p:column>
+                <p:column headerText="Model">
+                    <f:facet name="header">
+                        <h:outputText value="Telefono"/>
+                    </f:facet>
+                    <h:outputText value="#{registrados.telefono}"/>
+                </p:column>
+                <p:column headerText="Model">
+                    <f:facet name="header">
+                        <h:outputText value="Direccion"/>
+                    </f:facet>
+                    <h:outputText value="#{registrados.direccion}"/>
+                </p:column>
+            </p:dataTable>
+
+            <center>
+                <p:panel header="Registrar nuevo cliente" id="nuevo">
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Nombre:"/>
+                        <p:inputText value="#{AlquilerItems.nuevoCliente.nombre}"/>
+                        <p:outputLabel value="Documento:"/>
+                        <p:inputText value="#{AlquilerItems.nuevoCliente.documento}"/>
+                        <p:outputLabel value="Telefono:"/>
+                        <p:inputText value="#{AlquilerItems.nuevoCliente.telefono}"/>
+                        <p:outputLabel value="Direccion:"/>
+                        <p:inputText value="#{AlquilerItems.nuevoCliente.direccion}"/>
+                        <p:outputLabel value="Email:"/>
+                        <p:inputText value="#{AlquilerItems.nuevoCliente.email}"/>
+                        <p:commandButton value="Registrar cliente" actionListener="#{AlquilerItems.registrarCliente}" update="registrado nuevo">
+                            <p:resetInput target="nuevo"/>
+                        </p:commandButton>
+                        <p:commandButton value="Detalles de cliente" action="RegistroClienteItem.xhtml" update="registrado nuevo">
+                            <p:resetInput target="nuevo"/>
+                        </p:commandButton>
+                    </p:panelGrid>
+                    <p:ajaxExceptionHandler type="edu.eci.pdsw.samples.services.ExcepcionServiciosAlquiler" update="exceptionDialog" onexception="PF('exceptionDialog').show()" />
+                    <p:dialog id="exceptionDialog" header="Error" widgetVar="exceptionDialog" height="500px">         
+                        <h3> #{pfExceptionHandler.message}</h3>
+                        Cierre la ventana para continuar
+                    </p:dialog>
+                </p:panel>
+            </center>
+        </h:form>
+    </h:body>
+</html>

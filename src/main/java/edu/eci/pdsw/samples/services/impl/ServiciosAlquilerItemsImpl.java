@@ -6,6 +6,7 @@ import edu.eci.pdsw.sampleprj.dao.ClienteDAO;
 import edu.eci.pdsw.sampleprj.dao.ItemDAO;
 import edu.eci.pdsw.sampleprj.dao.ItemRentadoDAO;
 import edu.eci.pdsw.sampleprj.dao.PersistenceException;
+import edu.eci.pdsw.sampleprj.dao.TipoItemDAO;
 
 import edu.eci.pdsw.samples.entities.Cliente;
 import edu.eci.pdsw.samples.entities.Item;
@@ -33,6 +34,9 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
     
     @Inject
     private ItemRentadoDAO daoItemRentado;
+    
+    @Inject
+    private TipoItemDAO daoTipoItem;
 
     private static final int MULTA_DIARIA = 5000;
 
@@ -94,12 +98,20 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public TipoItem consultarTipoItem(int id) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            return daoTipoItem.load(id);
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("Error al consultar el tipo de item con id: " + id);
+        }
     }
 
     @Override
     public List<TipoItem> consultarTiposItem() throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            return daoTipoItem.loadTipoItems();
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("Error al consultar los tipos de item.");
+        }
     }
 
     @Override
@@ -107,8 +119,10 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
         try {
             daoCliente.addItemACliente(docu, item, date, numdias);
         } catch (PersistenceException ex) {
+            Logger.getLogger(ServiciosAlquilerItemsImpl.class.getName()).log(Level.SEVERE,"\n\n\n\n------Documento: "+docu+" Item: "+item+" Fecha: "+date+" Dias: "+numdias+"------\n\n\n\n",ex);
             throw new ExcepcionServiciosAlquiler("Error al agregar el item con id: " + item.getId() + ", al cliente con documento: " + docu, ex);
         }
+        
     }
 
     @Override

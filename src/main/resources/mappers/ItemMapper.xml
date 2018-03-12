@@ -42,6 +42,6 @@
         <result property="tarifaxDia" column="i_tarifaxdia"/>
         <result property="formatoRenta" column="i_formatorenta"/>
         <result property="genero" column="i_genero"/>
-        <association property="tipo" javaType="TipoItem" resultMap="edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ClienteMapper.tipoItemResult"/>
+        <association property="tipo" javaType="TipoItem" resultMap="edu.eci.pdsw.sampleprj.dao.mybatis.mappers.TipoItemMapper.tipoItemResult"/>
     </resultMap>
 </mapper>

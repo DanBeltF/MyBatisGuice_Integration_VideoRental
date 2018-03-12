@@ -63,10 +63,5 @@
         <result property="vetado" column="c_vetado"/>
         <collection property="rentados" ofType="ItemRentado" resultMap="edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemRentadoMapper.ItemRentadoResult"/>
     </resultMap>
-    
-    <resultMap type="TipoItem" id="tipoItemResult">
-        <id property="id" column="ti_id"/>
-        <result property="descripcion" column="ti_descripcion"/>
-    </resultMap>
           	
 </mapper>

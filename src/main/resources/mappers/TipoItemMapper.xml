@@ -4,8 +4,20 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="edu.eci.pdsw.sampleprj.dao.mybatis.mappers.TipoItemMapper">
-
+    <select parameterType="map" id="getTipoItemGeneral" resultMap="tipoItemResult">
+        SELECT 
+            ti.id AS ti_id,
+            ti.descripcion AS ti_descripcion
+        FROM VI_TIPOITEM AS ti
+        <if test="tiid != null">
+            WHERE ti.id = #{tiid}
+        </if>
+    </select>
     
+    <resultMap type="TipoItem" id="tipoItemResult">
+        <id property="id" column="ti_id"/>
+        <result property="descripcion" column="ti_descripcion"/>
+    </resultMap>
 
                 
 </mapper>

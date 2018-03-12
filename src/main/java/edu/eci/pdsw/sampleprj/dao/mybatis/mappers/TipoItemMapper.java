@@ -12,9 +12,15 @@ import org.apache.ibatis.annotations.Param;
 public interface TipoItemMapper {
     
     
-    public List<TipoItem> getTiposItems();
+    default List<TipoItem> getTiposItems(){
+        return getTipoItemGeneral(null);
+    }
     
-    public TipoItem getTipoItem(int id);
+    default TipoItem getTipoItem(int id){
+        return getTipoItemGeneral(id).get(0);
+    }
+    
+    public List<TipoItem> getTipoItemGeneral(@Param("tiid") Integer id);
     
     public void addTipoItem(String des);
 
