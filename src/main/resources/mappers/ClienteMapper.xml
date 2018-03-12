@@ -61,14 +61,7 @@
         <result property="direccion" column="c_direccion"/>
         <result property="email" column="c_email"/>
         <result property="vetado" column="c_vetado"/>
-        <collection property="rentados" ofType="ItemRentado" resultMap="ItemRentadoResult"/>
-    </resultMap>
-    
-    <resultMap type="ItemRentado" id="ItemRentadoResult">
-        <id property="id" column="ir_id"/>
-        <result property="fechainiciorenta" column="ir_fechainiciorenta"/>
-        <result property="fechafinrenta" column="ir_fechafinrenta"/>
-        <association property="item" javaType="Item" resultMap='edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemMapper.ItemResult'/>
+        <collection property="rentados" ofType="ItemRentado" resultMap="edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemRentadoMapper.ItemRentadoResult"/>
     </resultMap>
     
     <resultMap type="TipoItem" id="tipoItemResult">

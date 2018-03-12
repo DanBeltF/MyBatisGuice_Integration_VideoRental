@@ -10,6 +10,7 @@ import edu.eci.pdsw.samples.entities.Item;
 import edu.eci.pdsw.samples.entities.TipoItem;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.pdsw.samples.services.ServiciosAlquilerFactory;
+import java.time.LocalDate;
 
 /**
  *
@@ -31,6 +32,7 @@ public class Main {
         ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().vetarCliente(317658, true);
         System.out.println(ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().consultarCliente(317658));
         System.out.println("---Costo del alquiler--- " + ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().consultarCostoAlquiler(8, 4));
+        System.out.println("---Costo de una multa---" + ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().consultarMultaAlquiler(8, java.sql.Date.valueOf(LocalDate.now())));
         System.exit(0);
     }
     

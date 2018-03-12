@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import edu.eci.pdsw.sampleprj.dao.ClienteDAO;
 import edu.eci.pdsw.sampleprj.dao.ItemDAO;
+import edu.eci.pdsw.sampleprj.dao.ItemRentadoDAO;
 import edu.eci.pdsw.sampleprj.dao.PersistenceException;
 
 import edu.eci.pdsw.samples.entities.Cliente;
@@ -29,6 +30,9 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Inject
     private ClienteDAO daoCliente;
+    
+    @Inject
+    private ItemRentadoDAO daoItemRentado;
 
     private static final int MULTA_DIARIA = 5000;
 
@@ -81,7 +85,11 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public long consultarMultaAlquiler(int iditem, Date fechaDevolucion) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return daoItemRentado.consultarMultaAlquiler(iditem, fechaDevolucion);
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("Error al calcular la multa del item " + iditem, ex);
+        }
     }
 
     @Override
