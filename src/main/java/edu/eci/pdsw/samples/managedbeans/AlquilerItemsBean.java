@@ -36,6 +36,7 @@ public class AlquilerItemsBean implements Serializable {
     private Cliente nuevoCliente;
     private Date fechaEntrega;
     private Item nuevoItemRentar;
+    private ItemRentado devolverItemRentar;
     private int diasAlquiler;
     private long costoAlquiler;
     
@@ -53,6 +54,12 @@ public class AlquilerItemsBean implements Serializable {
         sp.registrarCliente(nuevoCliente);
         nuevoCliente = new Cliente();
         nuevoCliente.setRentados(new ArrayList<ItemRentado>());
+    }
+    
+    public void devolverItem() throws ExcepcionServiciosAlquiler{
+        if(devolverItemRentar==null)throw new ExcepcionServiciosAlquiler("Debe seleccionar un Item!");
+        if(devolverItemRentar.getItem()==null)throw new ExcepcionServiciosAlquiler("El item rentado no tiene un item asociado.");
+        sp.registrarDevolucion(devolverItemRentar.getItem().getId());
     }
 
     public List<Item> getItemsDisponibles() {
@@ -124,5 +131,14 @@ public class AlquilerItemsBean implements Serializable {
     public void setCostoAlquiler(long costoAlquiler) {
         this.costoAlquiler = costoAlquiler;
     }
+
+    public ItemRentado getDevolverItemRentar() {
+        return devolverItemRentar;
+    }
+
+    public void setDevolverItemRentar(ItemRentado devolverItemRentar) {
+        this.devolverItemRentar = devolverItemRentar;
+    }
+    
     
 }

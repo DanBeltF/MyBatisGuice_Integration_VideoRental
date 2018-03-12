@@ -7,7 +7,7 @@
     <h:body>
         <h:body>
             <h:form id="form">
-                <p:dataTable var="items" value="#{AlquilerItems.selected.rentados}" id="Titems">
+                <p:dataTable var="items" value="#{AlquilerItems.selected.rentados}" id="Titems" selectionMode="single" selection="#{AlquilerItems.devolverItemRentar}" rowKey="#{items.id}">
                     <f:facet name="header">
                         <h:outputText value="Cliente #{AlquilerItems.selected.nombre}"/>
                     </f:facet>
@@ -24,6 +24,12 @@
                         <h:outputText value="#{AlquilerItems.multasItems(items)}"/>
                     </p:column>
                 </p:dataTable>
+                <p:separator style="height:5px" />
+                <center>
+                    <p:commandButton value="Devolver Prestamo" actionListener="#{AlquilerItems.devolverItem()}" update="Titems TitemsDisponibles" onsuccess="alert('Eliminacion realizada con exito');" oncomplete="location.reload();">
+                        <p:resetInput target="Titems"/>
+                    </p:commandButton>
+                </center>
                 <p:separator style="height:5px" />
                 <p:fieldset legend="Registrar alquiler" collapsed="true" toggleable="true" toggleSpeed="500">
                     <!--<p:ajax event="toggle" listener=""/>-->
@@ -47,7 +53,7 @@
                                 <p:commandButton value="Calcular alquiler" actionListener="#{AlquilerItems.consultarCostoAlquiler()}" update="Titems TitemsDisponibles alquiler">
                                     <p:resetInput target="alquiler"/>
                                 </p:commandButton>
-                                <p:commandButton value="Alquilar" actionListener="#{AlquilerItems.alquilar()}" update="Titems TitemsDisponibles alquiler">
+                                <p:commandButton value="Alquilar" actionListener="#{AlquilerItems.alquilar()}" update="Titems TitemsDisponibles alquiler" oncomplete="alert('Alquiler realizado');">
                                     <p:resetInput target="alquiler"/>
                                 </p:commandButton>
                             </h:panelGrid>
