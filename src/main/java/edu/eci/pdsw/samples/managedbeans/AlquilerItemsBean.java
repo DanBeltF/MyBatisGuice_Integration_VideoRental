@@ -60,7 +60,12 @@ public class AlquilerItemsBean implements Serializable {
     }
     
     public long multasItems(ItemRentado i) throws ExcepcionServiciosAlquiler{
-        return sp.consultarMultaAlquiler(i.getItem().getId(), Date.valueOf(LocalDate.now()));
+        
+        try {
+            return sp.consultarMultaAlquiler(i.getItem().getId(), Date.valueOf(LocalDate.now()));
+        } catch (java.lang.NullPointerException ex) {
+            return 0;
+        }
     }
     
     public void consultarCostoAlquiler() throws ExcepcionServiciosAlquiler{

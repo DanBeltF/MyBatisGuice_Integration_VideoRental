@@ -13,15 +13,9 @@ import org.apache.ibatis.annotations.Param;
 public interface ItemMapper {
     
     
-    default List<Item> consultarItems(){
-        return consultarItemGeneral(null);
-    }
+    public List<Item> consultarItems();
     
-    default Item consultarItem(int id){
-        return consultarItemGeneral(id).get(0);
-    }
-    
-    public List<Item> consultarItemGeneral(@Param("iid") Integer id);
+    public Item consultarItem(@Param("iid")int id);
     
     public void insertarItem(@Param("it") Item it);
     

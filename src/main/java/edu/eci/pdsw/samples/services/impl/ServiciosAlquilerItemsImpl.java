@@ -119,7 +119,6 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
         try {
             daoCliente.addItemACliente(docu, item, date, numdias);
         } catch (PersistenceException ex) {
-            Logger.getLogger(ServiciosAlquilerItemsImpl.class.getName()).log(Level.SEVERE,"\n\n\n\n------Documento: "+docu+" Item: "+item+" Fecha: "+date+" Dias: "+numdias+"------\n\n\n\n",ex);
             throw new ExcepcionServiciosAlquiler("Error al agregar el item con id: " + item.getId() + ", al cliente con documento: " + docu, ex);
         }
         
