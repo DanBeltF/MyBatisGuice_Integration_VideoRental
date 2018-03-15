@@ -99,6 +99,11 @@
                 </executions>
             </plugin>
             
+		
+		
+		
+		
+		
             <!-- create local H2 database -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
