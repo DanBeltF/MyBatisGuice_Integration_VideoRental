@@ -56,6 +56,10 @@ public class AlquilerItemsBean implements Serializable {
         nuevoCliente.setRentados(new ArrayList<ItemRentado>());
     }
     
+    public List<ItemRentado> getSelectedRentados() throws ExcepcionServiciosAlquiler{
+        return sp.consultarItemsCliente(selected.getDocumento());
+    }
+    
     public void devolverItem() throws ExcepcionServiciosAlquiler{
         if(devolverItemRentar==null)throw new ExcepcionServiciosAlquiler("Debe seleccionar un Item!");
         if(devolverItemRentar.getItem()==null)throw new ExcepcionServiciosAlquiler("El item rentado no tiene un item asociado.");
