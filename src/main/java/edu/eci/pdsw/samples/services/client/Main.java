@@ -5,12 +5,10 @@
  */
 package edu.eci.pdsw.samples.services.client;
 
-import edu.eci.pdsw.samples.entities.Cliente;
 import edu.eci.pdsw.samples.entities.Item;
 import edu.eci.pdsw.samples.entities.TipoItem;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.pdsw.samples.services.ServiciosAlquilerFactory;
-import java.sql.Date;
 import java.time.LocalDate;
 
 /**

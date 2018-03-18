@@ -8,7 +8,6 @@ package edu.eci.pdsw.samples.services;
 import com.google.inject.Injector;
 import edu.eci.pdsw.samples.services.impl.ServiciosAlquilerItemsImpl;
 import org.mybatis.guice.XMLMyBatisModule;
-import org.mybatis.guice.datasource.helper.JdbcHelper;
 
 import static com.google.inject.Guice.createInjector;
 import edu.eci.pdsw.sampleprj.dao.ClienteDAO;
