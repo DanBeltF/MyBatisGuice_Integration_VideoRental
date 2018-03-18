@@ -53,6 +53,7 @@ public class AlquilerItemsBean implements Serializable {
     }
     
     public List<ItemRentado> getSelectedRentados() throws ExcepcionServiciosAlquiler{
+        if(selected==null)throw new ExcepcionServiciosAlquiler("Debe seleccionar un Cliente.");
         return sp.consultarItemsCliente(selected.getDocumento());
     }
     
@@ -76,6 +77,7 @@ public class AlquilerItemsBean implements Serializable {
     }
     
     public void consultarCostoAlquiler() throws ExcepcionServiciosAlquiler{
+        if(nuevoItemRentar==null)throw new ExcepcionServiciosAlquiler("Debe seleccionar un Item!");
         setCostoAlquiler(sp.consultarCostoAlquiler(nuevoItemRentar.getId(), diasAlquiler));
     }
     
